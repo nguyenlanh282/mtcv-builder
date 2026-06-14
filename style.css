@@ -166,8 +166,8 @@ body::before {
 .step-line.active { background: linear-gradient(90deg, var(--success), var(--accent)); }
 
 /* ---------- Step Content ---------- */
-.step-content { display: none; animation: fadeSlideIn 0.35s ease; }
-.step-content.active { display: block; }
+.step-content { animation: fadeSlideIn 0.35s ease; }
+.step-content.active { animation: fadeSlideIn 0.35s ease; }
 
 @keyframes fadeSlideIn {
   from { opacity: 0; transform: translateY(12px); }
