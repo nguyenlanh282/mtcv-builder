@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTCV Builder — Công cụ Viết Mô Tả Công Việc</title>
+  <meta name="description" content="Công cụ viết Bản Mô Tả Công Việc chuẩn chuyên gia theo phương pháp 6 bước JD-BUILDER">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-wrapper">
+
+  <!-- ========== HEADER ========== -->
+  <header class="app-header">
+    <div class="app-logo">
+      <div class="app-logo-icon">JD</div>
+      <div class="app-logo-text">
+        <h1>MTCV Builder</h1>
+        <span>Phương pháp 6 bước — Cô Loan (PDCA)</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="view-tabs">
+        <button class="view-tab active" data-view="form">✏️ Nhập liệu</button>
+        <button class="view-tab" data-view="preview">👁️ Xem trước</button>
+        <button class="view-tab" data-view="checklist">✅ Kiểm tra</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== MAIN ========== -->
+  <main class="app-main">
+
+    <!-- ===== FORM VIEW ===== -->
+    <div class="form-view active" id="formView">
+
+      <!-- Step Progress -->
+      <div class="step-progress" id="stepProgress">
+        <div class="step-item active" data-step="1"><div class="step-circle">1</div><div class="step-label">Thông tin</div></div>
+        <div class="step-line"></div>
+        <div class="step-item" data-step="2"><div class="step-circle">2</div><div class="step-label">Phạm vi</div></div>
+        <div class="step-line"></div>
+        <div class="step-item" data-step="3"><div class="step-circle">3</div><div class="step-label">Trách nhiệm</div></div>
+        <div class="step-line"></div>
+        <div class="step-item" data-step="4"><div class="step-circle">4</div><div class="step-label">Phối hợp</div></div>
+        <div class="step-line"></div>
+        <div class="step-item" data-step="5"><div class="step-circle">5</div><div class="step-label">Quyền hạn</div></div>
+        <div class="step-line"></div>
+        <div class="step-item" data-step="6"><div class="step-circle">6</div><div class="step-label">Yêu cầu</div></div>
+      </div>
+
+      <!-- ===== STEP 1: Thông tin chung ===== -->
+      <div class="step-content active" data-step="1">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">📋</span> Bước 1 — Thông tin Chung</div>
+          <div class="section-desc">Xác định vị trí trong tổ chức. Viết cho <strong>VỊ TRÍ</strong>, không viết cho cá nhân.</div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Công ty <span class="required">*</span></label>
+              <select class="form-select" id="companyName">
+                <option value="">— Chọn công ty —</option>
+                <option value="Hệ thống Y Khoa Ái Nghĩa">Hệ thống Y Khoa Ái Nghĩa</option>
+                <option value="Hệ thống Sản Phụ Khoa Hamec">Hệ thống Sản Phụ Khoa Hamec</option>
+                <option value="Công ty Tripower">Công ty Tripower</option>
+                <option value="Công ty Enzara">Công ty Enzara</option>
+                <option value="custom">Nhập tên khác...</option>
+              </select>
+            </div>
+            <div class="form-group hidden" id="customCompanyWrap">
+              <label class="form-label">Tên công ty</label>
+              <input class="form-input" id="customCompanyName" placeholder="Nhập tên công ty...">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Chức danh <span class="required">*</span></label>
+              <input class="form-input" id="positionName" placeholder="VD: Nhân viên Tư vấn, Trưởng phòng KD...">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phòng ban <span class="required">*</span></label>
+              <input class="form-input" id="department" placeholder="VD: Phòng Kinh doanh">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Cấp bậc <span class="required">*</span></label>
+              <select class="form-select" id="jobLevel">
+                <option value="">— Chọn cấp bậc —</option>
+                <option value="leader">Lãnh đạo cấp cao (CEO, GĐ)</option>
+                <option value="manager">Quản lý cấp trung (TP, Phó TP)</option>
+                <option value="expert">Chuyên gia</option>
+                <option value="staff">Nhân viên</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Báo cáo trực tiếp cho <span class="required">*</span></label>
+              <input class="form-input" id="reportDirect" placeholder="VD: Trưởng phòng Kinh doanh">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Báo cáo gián tiếp cho</label>
+              <input class="form-input" id="reportIndirect" placeholder="VD: Giám đốc Công ty">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Quản lý trực tiếp</label>
+              <input class="form-input" id="numReports" type="number" min="0" value="0" placeholder="Số người quản lý">
+              <span class="form-help">Số lượng direct reports (0 = không quản lý ai)</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Người thay thế khi vắng mặt</label>
+              <input class="form-input" id="substitute" placeholder="VD: Theo sự chỉ đạo của Trưởng phòng KD">
+            </div>
+          </div>
+
+          <!-- Optional personal info -->
+          <details class="mt-3" style="cursor:pointer">
+            <summary style="font-size:0.82rem;color:var(--text-secondary);font-weight:600;">📎 Thông tin cá nhân (tuỳ chọn — điền khi giao MTCV cho nhân viên cụ thể)</summary>
+            <div class="form-grid mt-2">
+              <div class="form-group">
+                <label class="form-label">Họ và tên</label>
+                <input class="form-input" id="empName" placeholder="Họ và tên nhân viên">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mã nhân viên</label>
+                <input class="form-input" id="empCode" placeholder="Mã NV">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input class="form-input" id="empEmail" placeholder="email@company.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mobile</label>
+                <input class="form-input" id="empMobile" placeholder="0xxx xxx xxx">
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- ===== STEP 2: Phạm vi Công việc ===== -->
+      <div class="step-content" data-step="2">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">🎯</span> Bước 2 — Phạm vi Công việc</div>
+          <div class="section-desc">Viết 2–3 ý bao quát. Mỗi ý đủ 3 yếu tố theo công thức.</div>
+
+          <div class="formula-hint">
+            <strong>Công thức:</strong> <code>PHẠM VI = ĐỘNG TỪ + TÂN NGỮ + TÁC ĐỘNG</code><br>
+            <strong>Ví dụ:</strong> <em><span style="color:var(--accent-light)">Tư vấn, bán hàng và chăm sóc</span> khách hàng về sản phẩm/dịch vụ của công ty <span style="color:var(--cyan)">nhằm đạt doanh số theo mục tiêu đề ra</span></em>
+          </div>
+
+          <div id="scopeContainer">
+            <!-- Scope items rendered by JS -->
+          </div>
+
+          <button class="btn-add-row" id="addScope">＋ Thêm phạm vi</button>
+
+          <!-- Verb suggestions -->
+          <div class="verb-panel mt-2" id="verbPanel">
+            <div class="verb-panel-title">💡 Gợi ý Động từ theo cấp bậc: <span id="verbLevelLabel">—</span></div>
+            <div class="verb-tags" id="verbTags">
+              <span class="text-muted" style="font-size:0.8rem;">Chọn cấp bậc ở Bước 1 để xem gợi ý</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 3: Trách nhiệm chính ===== -->
+      <div class="step-content" data-step="3">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">📊</span> Bước 3 — Trách nhiệm Chính</div>
+          <div class="section-desc">Xác định nhiệm vụ theo nhóm, giảm dần theo mức độ quan trọng. Tổng tỷ trọng các phần = 100%.</div>
+
+          <div class="formula-hint">
+            <strong>Trách nhiệm:</strong> <code>ĐỘNG TỪ + TÂN NGỮ</code> (bỏ phần Tác động)<br>
+            <strong>Kết quả đầu ra:</strong> <code>DANH TỪ + MỨC ĐỘ THÀNH CÔNG</code> (số lượng / chất lượng / tiến độ)<br>
+            ⛔ <strong>TUYỆT ĐỐI KHÔNG</strong> cho con số cụ thể vào kết quả — con số thuộc về KPI!
+          </div>
+
+          <!-- Strategic tasks (only for managers) -->
+          <div id="strategicSection" class="hidden">
+            <h3 style="font-size:0.92rem;font-weight:600;margin:16px 0 10px;color:var(--accent-light);">
+              ⚡ Nhiệm vụ Chiến lược <span class="text-muted" style="font-weight:400;font-size:0.78rem;">(chỉ dành cho vị trí Quản lý)</span>
+            </h3>
+            <div class="dynamic-table-wrap">
+              <table class="dynamic-table" id="strategicTable">
+                <thead>
+                  <tr>
+                    <th class="col-stt">STT</th>
+                    <th>Nội dung</th>
+                    <th class="col-weight">%</th>
+                    <th>Kết quả đầu ra</th>
+                    <th class="col-action"></th>
+                  </tr>
+                </thead>
+                <tbody id="strategicBody"></tbody>
+              </table>
+            </div>
+            <button class="btn-add-row" data-target="strategicBody">＋ Thêm nhiệm vụ chiến lược</button>
+          </div>
+
+          <!-- Main tasks -->
+          <h3 style="font-size:0.92rem;font-weight:600;margin:20px 0 10px;">📌 Nhiệm vụ Chính</h3>
+          <div class="dynamic-table-wrap">
+            <table class="dynamic-table" id="mainTaskTable">
+              <thead>
+                <tr>
+                  <th class="col-stt">STT</th>
+                  <th>Nội dung</th>
+                  <th class="col-weight">%</th>
+                  <th>Kết quả đầu ra</th>
+                  <th class="col-action"></th>
+                </tr>
+              </thead>
+              <tbody id="mainTaskBody"></tbody>
+            </table>
+          </div>
+          <button class="btn-add-row" data-target="mainTaskBody">＋ Thêm nhiệm vụ chính</button>
+
+          <!-- Total -->
+          <div class="total-row mt-2">
+            <span>Tổng phần chính:</span>
+            <span class="total-value" id="mainTotalWeight">0%</span>
+            <span class="text-muted">/70%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 4: Phối hợp & Hỗ trợ ===== -->
+      <div class="step-content" data-step="4">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">🤝</span> Bước 4 — Phối hợp & Công việc Bổ sung</div>
+          <div class="section-desc">Phối hợp = việc CỦA PHÒNG KIA, không phải việc của mình.</div>
+
+          <div class="formula-hint">
+            <strong>Công thức:</strong> <code>Phối hợp với [Phòng A] trong [công việc CỦA Phòng A]</code><br>
+            <strong>Ví dụ:</strong> Phối hợp với <em>phòng Marketing</em> trong <em>công tác chạy quảng cáo, viết bài trên Fanpage</em>
+          </div>
+
+          <h3 style="font-size:0.92rem;font-weight:600;margin-bottom:10px;">🔗 Phối hợp & Hỗ trợ (15%)</h3>
+          <div class="dynamic-table-wrap">
+            <table class="dynamic-table" id="coopTable">
+              <thead>
+                <tr>
+                  <th class="col-stt">STT</th>
+                  <th style="width:35%">Phối hợp với</th>
+                  <th>Trong công việc</th>
+                  <th class="col-action"></th>
+                </tr>
+              </thead>
+              <tbody id="coopBody"></tbody>
+            </table>
+          </div>
+          <button class="btn-add-row" data-target="coopBody">＋ Thêm phối hợp</button>
+
+          <!-- Fixed sections -->
+          <h3 style="font-size:0.92rem;font-weight:600;margin:28px 0 12px;">📎 Công việc Bổ sung (30%)</h3>
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label">III. Công việc nội bộ bộ phận (5%)</label>
+              <textarea class="form-textarea" id="internalWork" rows="3">Tuân thủ các quy trình thực hiện công việc trong bộ phận đảm bảo chính xác, hiệu quả.
+Phối hợp các thành viên trong cùng bộ phận để giải quyết công việc đạt hiệu quả cao.
+Thường xuyên trau dồi kiến thức nghiệp vụ, kỹ năng làm việc và xử lý tình huống.</textarea>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">IV. Báo cáo (5%)</label>
+              <textarea class="form-textarea" id="reportWork" rows="2">Báo cáo định kỳ hàng ngày/hàng tuần/tháng và đột xuất theo yêu cầu thực tế.</textarea>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">V. Nhiệm vụ khác (5%)</label>
+              <textarea class="form-textarea" id="otherWork" rows="2">Các việc khác do cấp trên giao.</textarea>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">VI. Chấp hành Nội quy lao động (5%)</label>
+              <textarea class="form-textarea" id="complianceWork" rows="2">Tuân thủ Nội quy công ty và nội quy phòng/ban trực thuộc.
+Tuân thủ điều lệ, quy chế, quy trình chung của công ty.</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 5: Quyền hạn ===== -->
+      <div class="step-content" data-step="5">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">🔐</span> Bước 5 — Quyền hạn</div>
+          <div class="section-desc">3 nhóm quyền hạn. Quyền hạn PHẢI được CEO / Ban lãnh đạo phê duyệt.</div>
+
+          <!-- Quyền thông tin -->
+          <div class="rights-group">
+            <div class="rights-group-title"><span class="emoji">📢</span> 1. Quyền Thông tin</div>
+            <div class="rights-list" id="infoRightsList">
+              <!-- rendered by JS -->
+            </div>
+            <button class="btn-add-row" data-target="infoRightsList" data-type="right">＋ Thêm quyền</button>
+          </div>
+
+          <!-- Quyền ra quyết định -->
+          <div class="rights-group">
+            <div class="rights-group-title"><span class="emoji">⚖️</span> 2. Quyền Ra quyết định</div>
+            <div class="rights-list" id="decisionRightsList">
+            </div>
+            <button class="btn-add-row" data-target="decisionRightsList" data-type="right">＋ Thêm quyền</button>
+          </div>
+
+          <!-- Quyền nhân sự -->
+          <div class="rights-group">
+            <div class="rights-group-title"><span class="emoji">👥</span> 3. Quyền Nhân sự</div>
+            <div class="rights-list" id="hrRightsList">
+            </div>
+            <button class="btn-add-row" data-target="hrRightsList" data-type="right">＋ Thêm quyền</button>
+          </div>
+
+          <!-- Điều kiện làm việc -->
+          <div class="form-group mt-3">
+            <label class="form-label">Điều kiện làm việc</label>
+            <input class="form-input" id="workConditions" placeholder="VD: Làm theo ca (phát sinh nếu có), giờ hành chính...">
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 6: Yêu cầu & Cam kết ===== -->
+      <div class="step-content" data-step="6">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">🎓</span> Bước 6 — Yêu cầu Vị trí & Cam kết</div>
+          <div class="section-desc">4 nhóm tiêu chuẩn. Kỹ năng chỉ liệt kê 4–6 cái CƠ BẢN — thiếu thì đào tạo bổ sung.</div>
+
+          <div class="formula-hint">
+            ⚠️ <strong>Lưu ý:</strong> KHÔNG công khai giới tính, độ tuổi trong tin đăng tuyển — chỉ ghi NỘI BỘ.
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label">1. Tiêu chuẩn Học vấn <span class="required">*</span></label>
+              <textarea class="form-textarea" id="reqEducation" rows="2" placeholder="VD: Tốt nghiệp THPT, ưu tiên có khả năng giao tiếp Tiếng Anh"></textarea>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">2. Tiêu chuẩn Kinh nghiệm <span class="required">*</span></label>
+              <textarea class="form-textarea" id="reqExperience" rows="2" placeholder="VD: Ít nhất 01 năm kinh nghiệm telesales, ưu tiên đã có KN tại các studio hoặc ngành dịch vụ"></textarea>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">3. Tiêu chuẩn về Con người</label>
+              <textarea class="form-textarea" id="reqQualities" rows="2" placeholder="VD: Nam/Nữ, 20-35 tuổi; Sáng tạo, linh hoạt, chịu áp lực cao..."></textarea>
+              <span class="form-help">⚠️ Chỉ dùng nội bộ. Không công khai giới tính, độ tuổi khi đăng tuyển.</span>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <h3 style="font-size:0.92rem;font-weight:600;margin:20px 0 10px;">🛠️ 4. Tiêu chuẩn Kỹ năng (4–6 kỹ năng)</h3>
+          <div id="skillsList">
+            <!-- rendered by JS -->
+          </div>
+          <button class="btn-add-row" id="addSkill">＋ Thêm kỹ năng</button>
+          <span class="form-help mt-1" style="display:block">Chỉ liệt kê 4–6 kỹ năng cơ bản nhất. Thiếu → đào tạo bổ sung.</span>
+        </div>
+      </div>
+
+    </div><!-- /formView -->
+
+    <!-- ===== PREVIEW VIEW ===== -->
+    <div class="preview-view" id="previewView">
+      <div class="preview-toolbar">
+        <button class="btn btn-success" id="btnExportMd">📥 Xuất Markdown</button>
+        <button class="btn btn-primary" id="btnPrint">🖨️ In / PDF</button>
+        <button class="btn btn-secondary" id="btnCopyMd">📋 Copy Markdown</button>
+      </div>
+      <div class="preview-document" id="previewDoc">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ===== CHECKLIST VIEW ===== -->
+    <div class="checklist-view" id="checklistView">
+      <div class="section-card">
+        <div class="section-title"><span class="icon">✅</span> Checklist Kiểm tra MTCV — 15 Tiêu chí</div>
+        <div class="section-desc">Kiểm tra trước khi xuất bản. Đánh dấu ✓ vào các mục đạt yêu cầu.</div>
+
+        <div id="checklistItems">
+          <!-- rendered by JS -->
+        </div>
+
+        <div class="checklist-score" id="checklistScore">
+          <div class="score-num">0/15</div>
+          <div class="score-label">tiêu chí đạt</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========== WIZARD NAV ========== -->
+  <div class="wizard-nav" id="wizardNav">
+    <div class="step-info" id="stepInfoText">Bước 1 / 6 — Thông tin Chung</div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" id="btnPrev" disabled>← Quay lại</button>
+      <button class="btn btn-primary" id="btnNext">Tiếp theo →</button>
+    </div>
+  </div>
+
+</div><!-- /app-wrapper -->
+
+<script src="app.js"></script>
+</body>
+</html>
